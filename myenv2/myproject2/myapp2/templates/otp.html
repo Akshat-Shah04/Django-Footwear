@@ -1,0 +1,56 @@
+<!DOCTYPE HTML>
+{% extends "header.html" %}
+{% load static %}
+<html>
+{% block content %}
+
+
+
+<div id="colorlib-contact">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="contact-wrap">
+                    <h3>Enter OTP</h3>
+                    <form method="POST" action="{% url 'otp' %}" class="contact-form">
+                        {% csrf_token %}
+
+                        {% if msgAlert %}
+                        <div class="col-sm-12">
+                            <p class="alert alert-danger" role="alert">{{ msgAlert }}</p>
+                        </div>
+                        <div class="w-100"></div>
+                        {% endif %}
+
+                        {% if msgSuccess %}
+                        <div class="col-sm-12">
+                            <p class="alert alert-success" role="alert">{{ msgSuccess }}</p>
+                        </div>
+                        <div class="w-100"></div>
+                        {% endif %}
+
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div class="form-group">
+                                    <label for="uotp">OTP</label>
+                                    <input type="text" id="uotp" class="form-control" placeholder="Enter your OTP" name="uotp" required>
+                                </div>
+                            </div>
+                            <div class="w-100"></div>
+                            <div class="col-sm-12">
+                                <div class="form-group">
+                                    <input type="submit" value="Verify OTP" class="btn btn-primary">
+                                </div>
+                            </div>
+                            <div class="w-100"></div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
+</body>
+</html>

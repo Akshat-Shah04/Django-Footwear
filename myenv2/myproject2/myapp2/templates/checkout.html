@@ -1,0 +1,187 @@
+{% extends "header.html" %}
+{% load static %}
+
+<!DOCTYPE HTML>
+<html>
+    {% block content %}
+    <div class="breadcrumbs">
+        <div class="container">
+            <div class="row">
+                <div class="col">
+                    <p class="bread"><span><a href="index.html">Home</a></span> / <span>Checkout</span></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="colorlib-product">
+        <div class="container">
+            <div class="row row-pb-lg">
+                <div class="col-sm-10 offset-md-1">
+                    <div class="process-wrap">
+                        <div class="process text-center active">
+                            <p><span>01</span></p>
+                            <h3>Shopping Cart</h3>
+                        </div>
+                        <div class="process text-center active">
+                            <p><span>02</span></p>
+                            <h3>Checkout</h3>
+                        </div>
+                        <div class="process text-center">
+                            <p><span>03</span></p>
+                            <h3>Order Complete</h3>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-lg-4">
+                    <div class="cart-detail bg-light p-4 rounded">
+                        <h2 class="mb-4">Cart Total</h2>
+                        <ul class="list-unstyled">
+                            <li>
+                                <ul class="list-unstyled ps-0">
+                                    {% for i in cart_items %}
+                                    <li class="d-flex justify-content-between">
+                                        <span>{{ i.qty }} x {{ i.product.pname }}</span>
+                                        <span>$ {{ i.total }}</span>
+                                    </li>
+                                    {% endfor %}
+                                </ul>
+                            </li>
+                            <li class="d-flex justify-content-between">
+                                <span class="font-weight-bold">Subtotal</span> 
+                                <span class="font-weight-bold">$ {{ subtotal }}</span>
+                            </li>
+                            <li class="d-flex text-warning justify-content-between font-weight-bold">
+                                <span>Shipping</span> 
+                                <span>$ {{ delivery|default:50 }}</span>
+                            </li>
+                            <li class="d-flex justify-content-between text-danger font-weight-bold">
+                                <span>Total Discounts</span> 
+                                <span>$ {{ request.session.discount|default:0 }}</span>
+                            </li>
+                            <li class="d-flex justify-content-between font-weight-bold text-primary">
+                                <span class="text-decoration-underline">Order Total</span> 
+                                <span>$ {{ roundtotal|default:0 }}</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Billing Details -->
+                <div class="col-lg-8">
+                    <form method="POST" action="{% url 'create_order' pk=cart.pk %}" class="colorlib-form">
+                        {% csrf_token %}
+                        <h2>Billing Details</h2>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label for="country">Select Country</label>
+                                    <div class="form-field">
+                                        <i class="icon icon-arrow-down3"></i>
+                                        <select name="country" id="country" class="form-control">
+                                            <option value="#">Select country</option>
+                                            <option value="Alaska">Alaska</option>
+                                            <option value="India">India</option>
+                                            <option value="China">China</option>
+                                            <option value="Japan">Japan</option>
+                                            <option value="Korea">Korea</option>
+                                            <option value="Philippines">Philippines</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="fname">First Name</label>
+                                    <input type="text" id="fname" name="firstname" class="form-control" placeholder="Your firstname" required>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="lname">Last Name</label>
+                                    <input type="text" id="lname" name="lastname" class="form-control" placeholder="Your lastname" required>
+                                </div>
+                            </div>
+
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label for="address">Address</label>
+                                    <input type="text" name="address" id="address" class="form-control" placeholder="Enter Your Address" required>
+                                </div>
+                            </div>
+
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label for="city">City</label>
+                                    <input type="text" name="city" id="city" class="form-control" placeholder="Town or City" required>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="state">State/Province</label>
+                                    <input type="text" name="state" id="state" class="form-control" placeholder="State Province" required>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="zipcode">Zip/Postal Code</label>
+                                    <input type="text" name="zipcode" id="zipcode" class="form-control" placeholder="Zip / Postal" required>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="email">E-mail Address</label>
+                                    <input type="email" name="email" id="email" class="form-control" placeholder="Your Email" required>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="mobile">Mobile Number</label>
+                                    <input type="tel" name="mobile" id="mobile" class="form-control" placeholder="Mobile Number" required>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Payment Method -->
+                        <h2>Payment Method</h2>
+                        <div class="form-group">
+                            <div class="col-md-12">
+                                <div class="radio">
+                                    <label><input type="radio" name="optradio" value="cod"> Cash On Delivery (C.O.D.)</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-12">
+                                <div class="checkbox">
+                                    <label><input type="checkbox" value="" required> I have read and accept the terms and conditions</label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-12 d-flex justify-content-end flex-wrap gap-3">
+                                <div class="col-12 col-sm-6 col-md-4 text-center">
+                                    <button type="submit" class="btn btn-primary w-100 py-2" id="place-order-btn">Pay $ {{ roundtotal }}</button>
+                                </div>
+                                <div class="col-12 col-sm-6 col-md-4 text-sm-center text-md-end">
+                                    <a href="{% url 'cart' %}" class="btn btn-secondary w-100 py-2">Back to Cart</a>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {% endblock %}
+
+ 
+</html>

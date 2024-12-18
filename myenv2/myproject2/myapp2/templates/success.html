@@ -1,0 +1,84 @@
+{% extends "header.html" %}
+{% block content %}
+<div class="container my-5">
+    <div class="row text-center">
+        <h1>Thank You for Your Order!</h1>
+        <p class="text-muted">Your order has been placed successfully.</p>
+    </div>
+    <hr>
+
+    <div class="row">
+        <!-- Order Details Table -->
+        <div class="col-md-6">
+            <h3>Order Details</h3>
+            <table class="table table-bordered">
+                <tbody>
+                    <tr>
+                        <th>Order Number</th>
+                        <td>{{ order.order_number }}</td>
+                    </tr>
+                    <tr>
+                        <th>Order Total</th>
+                        <td>$ {{ order.order_total }}</td>
+                    </tr>
+                    <tr>
+                        <th>Payment Method</th>
+                        <td>{{ order.payment_method }}</td>
+                    </tr>
+                    <tr>
+                        <th>Order Status</th>
+                        <td>{{ order.get_status_display }}</td>
+                    </tr>
+                    <tr>
+                        <th>Order Date</th>
+                        <td>{{ order.created_at }}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Billing Details Table -->
+        <div class="col-md-6">
+            <h3>Billing Details</h3>
+            <table class="table table-bordered">
+                <tbody>
+                    <tr>
+                        <th>First Name</th>
+                        <td>{{ order.billing.firstname }}</td>
+                    </tr>
+                    <tr>
+                        <th>Last Name</th>
+                        <td>{{ order.billing.lastname }}</td>
+                    </tr>
+                    <tr>
+                        <th>Address</th>
+                        <td>{{ order.billing.address }}</td>
+                    </tr>
+                    <tr>
+                        <th>City</th>
+                        <td>{{ order.billing.city }}</td>
+                    </tr>
+                    <tr>
+                        <th>Zipcode</th>
+                        <td>{{ order.billing.zipcode }}</td>
+                    </tr>
+                    <tr>
+                        <th>Country</th>
+                        <td>{{ order.billing.country }}</td>
+                    </tr>
+                    <tr>
+                        <th>Mobile</th>
+                        <td>{{ order.billing.mobile }}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <hr>
+    <div class="row d-flex flex-row justify-content-end align-items-center text-center">
+        <div class="col-sm-4 col-md-3">
+        <a href="{% url 'men' %}" class="btn btn-primary">Continue Shopping</a>
+    </div>
+    </div>
+</div>
+{% endblock %}

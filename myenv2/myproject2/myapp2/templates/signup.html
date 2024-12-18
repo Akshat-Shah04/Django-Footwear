@@ -1,0 +1,123 @@
+<!DOCTYPE HTML>
+{% extends "header.html" %}
+{% load static %}
+<html>
+{% block content %}
+
+<div id="colorlib-contact">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="contact-wrap">
+                    <h3 class="text-center mb-5">Sign-Up Page</h3>
+                    <form method="POST" action="{% url 'signup' %}" class="contact-form" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        <div class="row">
+                            {% if msgAlert %}
+                            <div class="col-md-12">
+                                <p class="alert alert-danger" role="alert">{{ msgAlert }}</p>
+                            </div>
+                            <div class="w-100"></div>
+
+                            {% endif %}
+
+                            {% if msgSuccess %}
+                            <div class="col-md-12">
+                                <p class="alert alert-success" role="alert">{{ msgSuccess }}</p>
+                            </div>
+                            <div class="w-100"></div>
+                            {% endif %}
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label for="role">Role</label>
+                                    <select class="form-select" aria-label="Default select example">
+                                        <option selected>------choose your role------</option>
+                                        <option value="buyer">Buyer</option>
+                                        <option value="seller">Seller</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="fname">First Name</label>
+                                    <input type="text" id="fname" class="form-control" name="fname"
+                                        placeholder="Your firstname" required>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="lname">Last Name</label>
+                                    <input type="text" id="lname" class="form-control" name="lname"
+                                        placeholder="Your lastname" required>
+                                </div>
+                            </div>
+
+                            <div class="w-100"></div>
+
+                            <div class="col-sm-12">
+                                <div class="form-group">
+                                    <label for="email">Email</label>
+                                    <input type="email" id="email" class="form-control" name="email"
+                                        placeholder="Your email address" required>
+                                </div>
+                            </div>
+
+                            <div class="w-100"></div>
+
+                            <div class="col-sm-12">
+                                <div class="form-group">
+                                    <label for="mobile">Mobile</label>
+                                    <input type="number" id="mobile" class="form-control" name="mobile"
+                                        placeholder="Your Mobile number" required>
+                                </div>
+                            </div>
+
+                            <div class="w-100"></div>
+
+                            <div class="col-sm-12">
+                                <div class="form-group">
+                                    <label for="password">Password</label>
+                                    <input type="password" id="password" class="form-control" name="password"
+                                        placeholder="Your password" required>
+                                </div>
+                            </div>
+
+                            <div class="w-100"></div>
+
+                            <div class="col-sm-12">
+                                <div class="form-group">
+                                    <label for="cpassword">Confirm Password</label>
+                                    <input type="password" id="cpassword" class="form-control" name="cpassword"
+                                        placeholder="Confirm your password" required>
+                                </div>
+                            </div>
+
+                            <div class="w-100"></div>
+
+                            <div class="col-sm-12">
+                                <div class="form-group">
+                                    <label for="profile">Profile Image</label>
+                                    <input type="file" id="profile" class="form-control" name="profile" accept="image/*"
+                                        required>
+                                </div>
+                            </div>
+
+                            <div class="w-100"></div>
+
+                            <div class="col-sm-2">
+                                <div class="form-group">
+                                    <input class="btn btn-primary" type="submit" value="Sign Up">
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+</body>
+
+</html>

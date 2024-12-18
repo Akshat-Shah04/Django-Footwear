@@ -1,0 +1,62 @@
+<!DOCTYPE HTML>
+{% extends "header.html" %}
+{% load static %}
+<html>
+{% block content %}
+
+<div id="colorlib-contact">
+	<div class="container">
+		<div class="row">
+			<div class="col-md-12">
+				<div class="contact-wrap">
+					<h3>Reset Password </h3>
+					<form method="POST" action="{% url "newpass" %}"  class="contact-form">
+						{% csrf_token %}
+						
+						{% if msgAlert %}
+						<div class="col-sm-12">
+                            <p class="alert alert-danger" role="alert">{{msgAlert}}</p>
+						</div>
+						<div class="w-100"></div>
+						{% endif %}
+						
+						{% if msgSuccess %}
+						<div class="col-sm-12">
+                            <p class="alert alert-danger" role="alert">{{msgSuccess}}</p>
+						</div>
+						<div class="w-100"></div>
+						{% endif %}
+
+						<div class="row">
+						
+							<div class="col-sm-12">
+								<div class="form-group">
+									<label for="password">New Password</label>
+									<input type="password" id="npassword" class="form-control" placeholder="Your new password" name="npassword">
+								</div>
+							</div>
+							<div class="w-100"></div>
+                            <div class="col-sm-12">
+								<div class="form-group">
+									<label for="password">Confirm New Password</label>
+									<input type="password" id="cnpassword" class="form-control" placeholder="Confirm your new password" name="cnpassword">
+								</div>
+							</div>
+							<div class="w-100"></div>
+							<div class="col-sm-12">
+								<div class="form-group">
+									<input type="submit" value="Change Password" class="btn btn-primary">
+								</div>
+							</div>
+							<div class="w-100"></div>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+{% endblock %}
+</body>
+
+</html>

@@ -1,0 +1,105 @@
+<!DOCTYPE HTML>
+{% extends "header.html" %}
+{% load static %}
+<html>
+<head>
+    <title>Update Profile</title>
+</head>
+<body>
+    {% block content %}
+    <div id="colorlib-contact">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="contact-wrap">
+                        <h3 class="text-center mb-5">Update Profile</h3>
+
+                        <!-- Display profile picture if available -->
+                        {% if user.profile %}
+                        <div class="container mt-5">
+                            <div class="row justify-content-center">
+                                <div class="col-md-4 text-center">
+                                    <div class="profile-container mb-5">
+                                        <img src="{{ user.profile.url }}" alt="Profile Image" class="img-fluid rounded-circle">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        {% endif %}
+
+                        <!-- Profile update form -->
+                        <form method="POST" action="{% url 'profile' %}" class="contact-form" enctype="multipart/form-data">
+                            {% csrf_token %}
+                            <div class="row">
+                                <!-- Error and success messages -->
+                                {% if msgAlert %}
+                                <div class="col-md-12 mt-4">
+                                    <p class="alert alert-danger" role="alert">{{ msgAlert }}</p>
+                                </div>
+                                <div class="w-100"></div>
+                                {% endif %}
+
+                                {% if msgSuccess %}
+                                <div class="col-md-12 mt-4">
+                                    <p class="alert alert-success" role="alert">{{ msgSuccess }}</p>
+                                </div>
+                                <div class="w-100"></div>
+                                {% endif %}
+
+                                <!-- Form Fields -->
+                                <div class="col-md-6 mt-4">
+                                    <div class="form-group">
+                                        <label for="fname">First Name</label>
+                                        <input type="text" id="fname" class="form-control" value="{{ user.fname }}" name="fname" placeholder="Your first name">
+                                    </div> 
+                                </div>
+                                <div class="col-md-6 mt-4">
+                                    <div class="form-group">
+                                        <label for="lname">Last Name</label>
+                                        <input type="text" id="lname" class="form-control" value="{{ user.lname }}" name="lname" placeholder="Your last name">
+                                    </div>
+                                </div>
+                                <div class="w-100"></div>
+
+                                <div class="col-sm-12">
+                                    <div class="form-group">
+                                        <label for="email">Email</label>
+                                        <input type="email" id="email" class="form-control" value="{{ user.email }}" name="email" placeholder="Your email address">
+                                    </div>
+                                </div>
+                                <div class="w-100"></div>
+
+                                <div class="col-sm-12">
+                                    <div class="form-group">
+                                        <label for="mobile">Mobile</label>
+                                        <input type="number" id="mobile" class="form-control" value="{{ user.mobile }}" name="mobile" placeholder="Your mobile number">
+                                    </div>
+                                </div>
+                                <div class="w-100"></div>
+
+                                <div class="col-sm-12">
+                                    <div class="form-group">
+                                        <label for="profile">Profile Image</label>
+                                        <br>
+                                        <input type="file" id="profile" name="profile">
+                                    </div>
+                                </div>
+
+                                <div class="w-100"></div>
+
+                                <!-- Submit button -->
+                                <div class="col-sm-2">
+                                    <div class="form-group">
+                                        <input class="btn btn-primary" type="submit" value="Update Profile">
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endblock %}
+</body>
+</html>

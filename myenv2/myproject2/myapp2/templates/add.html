@@ -1,0 +1,129 @@
+<!DOCTYPE HTML>
+{% extends "sellerheader.html" %}
+{% load static %}
+<html>
+{% block content %}
+    <div class="breadcrumbs">
+        <div class="container">
+            <div class="row">
+                <div class="col">
+                    <p class="bread"><span><a href="{% url 'sindex' %}">Home</a></span> / <span>Add Product</span></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="colorlib-contact">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-12 m-3">
+                    {% if msgAlert %}
+                        <div class="col-sm-12">
+                            <p class="alert alert-danger" role="alert">{{ msgAlert }}</p>
+                        </div>
+                    {% endif %}
+                    {% if msgSuccess %}
+                        <div class="col-sm-12">
+                            <p class="alert alert-success" role="alert">{{ msgSuccess }}</p>
+                        </div>
+                    {% endif %}
+                </div>
+
+                <div class="col-sm-12">
+                    <h3>Add Product Information</h3>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="contact-wrap">
+                        <form method="POST" enctype="multipart/form-data" class="contact-form">
+                            {% csrf_token %}
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="pname">Product Name</label>
+                                        <input type="text" id="pname" name="pname" class="form-control" placeholder="Enter your product name">
+                                    </div>
+                                </div>
+
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="price">Product Price</label>
+                                            <input type="number" id="price" name="price" class="form-control"  placeholder="Enter your Product Price (in $)" step="0.01" min="0" title="Please enter a valid price, e.g. 19.99" required>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="row">
+
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="category">Category</label>
+                                        <select id="category" name="category" class="form-select form-select-sm">
+                                            <option selected disabled>------choose your category------</option>
+                                            <option value="Running">Running Shoes</option>
+                                            <option value="Formal">Formal Shoes</option>
+                                            <option value="Sports">Sports Shoes</option>
+                                            <option value="Casual">Casual Shoes</option>
+                                            <option value="Sneakers">Sneakers</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="size">Size</label>
+                                        <select id="size" name="size" class="form-select form-select-sm">
+                                            <option selected disabled>------choose your size------</option>
+                                            <option value="US 7">US 7</option>
+                                            <option value="US 8">US 8</option>
+                                            <option value="US 9">US 9</option>
+                                            <option value="US 10">US 10</option>
+                                            <option value="EU 40">EU 40</option>
+                                            <option value="EU 42">EU 42</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="brand">Brand</label>
+                                        <select id="brand" name="brand" class="form-select form-select-sm">
+                                            <option selected disabled>------choose your brand------</option>
+                                            <option value="Nike">Nike</option>
+                                            <option value="Adidas">Adidas</option>
+                                            <option value="Puma">Puma</option>
+                                            <option value="Reebok">Reebok</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="col-sm-12">
+                                    <div class="form-group">
+                                        <label for="desc">Description</label>
+                                        <textarea name="desc" id="desc" cols="30" rows="5" class="form-control" placeholder="Enter Product Description"></textarea>
+                                    </div>
+                                </div>
+
+                                <div class="col-sm-12">
+                                    <div class="form-group">
+                                        <label for="pimage">Product Image</label>
+                                        <input type="file" id="pimage" name="pimage">
+                                    </div>
+                                </div>
+
+                                <div class="col-sm-12">
+                                    <div class="form-group">
+                                        <input type="submit" value="Add Product" class="btn btn-success">
+                                    </div>
+                                </div>
+                            </div>
+                        </form>     
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+</html>

@@ -1,0 +1,62 @@
+<!DOCTYPE HTML>
+{% extends "header.html" %}
+{% load static %}
+<html>
+{% block content %}
+
+<div id="colorlib-contact">
+	<div class="container">
+		<div class="row">
+			<div class="col-md-12">
+				<div class="contact-wrap">
+					<h3>Login Page</h3>
+					<form method="POST" action="{% url "login" %}"  class="contact-form">
+						{% csrf_token %}
+						
+						{% if msgAlert %}
+						<div class="col-sm-12">
+                            <p class="alert alert-danger" role="alert">{{msgAlert}}</p>
+						</div>
+						<div class="w-100"></div>
+						{% endif %}
+						{% if msgSuccess %}
+						<div class="col-sm-12">
+                            <p class="alert alert-success" role="alert">{{msgSuccess}}</p>
+						</div>
+						<div class="w-100"></div>
+						{% endif %}
+
+						<div class="row">
+							
+							<div class="col-sm-12">
+								<div class="form-group">
+									<label for="email">Email</label>
+									<input type="text" id="email" class="form-control" placeholder="Your email address" name="email">
+								</div>
+							</div>
+							<div class="w-100"></div>
+							<div class="col-sm-12">
+								<div class="form-group">
+									<label for="password">Password</label>
+									<input type="password" id="password" class="form-control" placeholder="Your password" name="password">
+								</div>
+							</div>
+							<div class="w-100"></div>
+							<div class="col-sm-12">
+								<div class="form-group">
+									<input type="submit" value="Login" class="btn btn-primary">
+								</div>
+							</div>
+							<div class="w-100"></div>
+							<a class="text-primary" href="{% url 'fpass' %}">Forgot Password ? </a>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+{% endblock %}
+</body>
+
+</html>

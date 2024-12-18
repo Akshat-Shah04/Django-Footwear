@@ -1,0 +1,86 @@
+{% extends "sellerheader.html" %}
+{% load static %}
+
+{% block content %}
+<div class="colorlib-product">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-10"></div> <!-- Spacer to push the button to the right -->
+            <div class="col-lg-2 mb-5">
+                <a href="{% url 'add' %}" class="btn px-5 py-1 btn-primary d-flex justify-content-center align-items-center" style="padding: 5px 10px; font-size: 0.8rem;">
+                    <i class="bi bi-plus-circle me-2"></i> Add Product
+                </a>
+            </div>
+        </div>
+        
+        <div class="row">
+            <div class="col-sm-8 offset-sm-2 text-center colorlib-heading">
+                <h2>Products in Your Store</h2>
+            </div>
+        </div>
+        <div class="row row-pb-md">
+            {% for i in product %}
+            <div class="col-lg-4 overflow-hidden d-flex flex-column mb-4 text-center">
+                <div class="product-entry border" style="width: 100%; margin: auto;">
+                    <a href="#" class="prod-img">
+                        <img src="{{ i.pimage.url }}" class="img-fluid" alt="Product Image" style="height: 289px; width:100%; object-fit: contain;">
+                    </a>
+                    <div class="overflow-hidden d-flex flex-column justify-content-center align-items-center">
+                        <h5><a href="#">{{ i.brand }} {{ i.pname }}</a></h5>
+                        <span class="price">${{ i.price }}</span>
+                        <div class="mb-4 mt-2">Category : <span class="p-2 border border-2 border-secondary">{{ i.category }}</span></div>
+                        <div class="mb-3">Size Available : <span class="p-2 border border-2 border-secondary">{{ i.size }}</span></div>
+                        <div class="btn-group d-flex p-1 justify-content-center" role="group">
+                            <a href="{% url 'updateProduct' i.id %}" class="overflow-hidden px-3 btn btn-warning d-flex justify-content-center align-items-center" style="width: 32%; font-size: 0.8rem; padding: 5px;">
+                                <i class="bi bi-pencil-square me-1"></i> Edit
+                            </a>
+                            <a href="#" class="overflow-hidden p-1 px-3 btn btn-info d-flex justify-content-center align-items-center" data-bs-toggle="modal" data-bs-target="#productModal{{ i.id }}" style="width: 32%; font-size: 0.8rem; padding: 5px;">
+                                <i class="bi bi-eye me-1"></i> View
+                            </a>
+                            <a href="{% url 'deleteProd' i.id %}" class="overflow-hidden p-1 px-3 btn btn-danger d-flex justify-content-center align-items-center" style="width: 32%; font-size: 0.8rem; padding: 5px;">
+                                <i class="bi bi-trash me-1"></i> Delete
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Product Details Modal -->
+                <div class="modal fade" id="productModal{{ i.id }}" tabindex="-1" aria-labelledby="productModalLabel{{ i.id }}" aria-hidden="true">
+                    <div class="modal-dialog modal-md">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="productModalLabel{{ i.id }}">Product Details</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <div class="text-center">
+                                    <img src="{{ i.pimage.url }}" class="img-fluid mb-3 modal-image" alt="Product Image" style="height: 300px; width: 90%; object-fit: contain;">
+                                </div>
+                                <h5>{{ i.brand }} {{ i.pname }}</h5>
+                                <p><strong>Description:</strong> {{ i.desc }}</p>
+                                <p><strong>Seller Information:</strong> {{ i.seller }}</p>
+                                <p><strong>Brand:</strong> {{ i.brand }}</p>
+                                <p><strong>Category:</strong> {{ i.category }}</p>
+                                <p><strong>Size:</strong> {{ i.size }}</p>
+                                <p><strong>Price:</strong> ${{ i.price }}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+
+<style>
+    /* CSS for modal image */
+    .modal-image {
+        height: 300px;
+        width: 90%;
+        object-fit: contain;
+    }
+</style>
+
+{% endblock %}

@@ -1,0 +1,90 @@
+<!DOCTYPE HTML>
+{% extends "header.html" %}
+{% load static %}
+<html>
+
+{% block content %}
+
+<div class="breadcrumbs">
+	<div class="container">
+		<div class="row">
+			<div class="col">
+				<p class="bread"><span><a href="index.html">Home</a></span> / <span>My Wishlist</span></p>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="colorlib-product">
+	<div class="container">
+		<div class="row row-pb-lg">
+			<div class="process mx-auto text-center">
+				<p>
+					<span class="border border-3 rounded-pill border-danger"><i class="bi bi-heart-fill"
+							style="font-size: 1.5rem;"></i></span>
+				</p>
+
+				<h1>WishList</h1>
+			</div>
+		</div>
+		<div class="row row-pb-lg">
+			<div class="col-md-12">
+				<div class="product-name d-flex">
+					<div class="one-forth text-left px-4">
+						<span>Product Name</span>
+					</div>
+					<div class="one-eight text-center">
+						<span>Price</span>
+					</div>
+					<div class="one-eight text-center">
+						<span>Quantity</span>
+					</div>
+					<div class="one-eight text-center">
+						<span>Product Size</span>
+					</div>
+					<div class="one-eight text-center px-4">
+						<span>Remove</span>
+					</div>
+				</div>
+				{% for i in wish %}
+				<div class="product-cart d-flex">
+					<div class="one-forth">
+						<div class="product-img" style="background-image: url({{i.product.pimage.url}});">
+						</div>
+						<div class="display-tc">
+							<h3>{{i.product.pname}}</h3>
+						</div>
+					</div>
+					<div class="one-eight text-center">
+						<div class="display-tc">
+							<span class="price">${{i.product.price}}</span>
+						</div>
+					</div>
+					<div class="one-eight text-center">
+						<div class="display-tc">
+							<input type="text" id="quantity" name="quantity"
+								class="form-control input-number text-center" value="1" min="1" max="100">
+						</div>
+					</div>
+					<div class="one-eight text-center">
+						<div class="display-tc">
+							<span class="price">{{i.product.size}}</span>
+						</div>
+					</div>
+					<div class="one-eight text-center">
+						<div class="display-tc">
+							<a href="{% url 'deletewish' pk=i.product.pk %}" class="closed">
+								
+							</a>
+						</div>
+					</div>
+				</div>
+				{% endfor %}
+			</div>
+		</div>
+	</div>
+
+{% endblock %}
+
+</body>
+</html>

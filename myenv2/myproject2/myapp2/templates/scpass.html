@@ -1,0 +1,66 @@
+<!DOCTYPE HTML>
+{% extends "sellerheader.html" %}  
+{% load static %}
+<html>
+
+{% block content %}
+<div id="colorlib-contact">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="contact-wrap">
+                    {% if msgAlert %}
+                        <div class="col-md-12">
+                            <p class="alert alert-danger" role="alert">{{ msgAlert }}</p>
+                        </div>
+                        <div class="w-100"></div>
+                    {% endif %}
+                    {% if msgSuccess %}
+                        <div class="col-sm-12">
+                            <p class="alert alert-success" role="alert">{{ msgSuccess }}</p>
+                        </div>
+                        <div class="w-100"></div>
+                    {% endif %}
+                    <h3>Change Password</h3>
+                    <form method="POST" action="{% url 'cpass' %}" class="contact-form">
+                        {% csrf_token %}
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div class="form-group">
+                                    <label for="password">Old Password</label>
+                                    <input type="password" id="password" class="form-control"
+                                        placeholder="Your old password" name="opassword" required>
+                                </div>
+                            </div>
+                            <div class="w-100"></div>
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label for="npassword">New Password</label>
+                                    <input type="password" id="npassword" class="form-control"
+                                        placeholder="Your new password" name="npassword" required>
+                                </div>
+                            </div>
+                            <div class="w-100"></div>
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label for="cnpassword">Confirm New Password</label>
+                                    <input type="password" id="cnpassword" class="form-control"
+                                        placeholder="Confirm your new password" name="cnpassword" required>
+                                </div>
+                            </div>
+                            <div class="w-100"></div>
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <input type="submit" value="Change Password" class="btn btn-primary">
+                                </div>
+                            </div>
+                            <div class="w-100"></div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+</html>
